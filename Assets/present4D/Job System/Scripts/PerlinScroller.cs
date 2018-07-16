@@ -47,8 +47,8 @@ public class PerlinScroller : MonoBehaviour {
 
         renderer.material = cubeMaterial;
 
-        renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-        renderer.receiveShadows = false;
+     //   renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+    //    renderer.receiveShadows = false;
 
         Collider collider = cubeToCopy.GetComponent<Collider>();
         collider.enabled = false;
@@ -62,14 +62,14 @@ public class PerlinScroller : MonoBehaviour {
         GameObject.Destroy(cubeToCopy);
         return cubes;
     }
-    int xoffset = 0;
+    float xoffset = 0;
 
     struct PositionUpdateJob : IJobParallelForTransform
     {
         public int height;
         public int width;
         public int layers;
-        public int xoffset;
+        public float xoffset;
         public int zoffset;
         public void Execute(int i, TransformAccess transform)
         {
@@ -83,12 +83,13 @@ public class PerlinScroller : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
+        xoffset = xoffset + 0.1f;
         if (useJobSystem)
         {
             //   int xoffset = (int)(this.transform.position.x - width / 2.0f);
             cubeJob = new PositionUpdateJob()
             {
-                xoffset = xoffset++,
+                xoffset = xoffset,
                 zoffset = (int)(this.transform.position.z - height / 2.0f),
                 height = height,
                 width = width,
@@ -97,9 +98,9 @@ public class PerlinScroller : MonoBehaviour {
             cubePositionJobHandle = cubeJob.Schedule(cubeTransformsAccessArray);
 
         }
-        else { 
-           // OLD CODE WITHOUT JOB SYSTEM
-            xoffset++;
+        else {
+            // OLD CODE WITHOUT JOB SYSTEM
+     
             int zoffset = (int)(this.transform.position.z - height / 2.0f);
             for (int i = 0; i < cubeCount; i++)
             {
@@ -125,8 +126,8 @@ public class PerlinScroller : MonoBehaviour {
 
     static float GeneratePerlinHeight(float posx, float posz)
     {
-        float smooth = 0.03f;
-        float heightMult = 5;
+        float smooth = 0.04f;
+        float heightMult = 2;
         float height = (Mathf.PerlinNoise(posx * smooth,
             posz * smooth * 2) * heightMult + 
             Mathf.PerlinNoise(posx * smooth, 

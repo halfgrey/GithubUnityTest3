@@ -206,9 +206,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abe7dbecdf06f244f810bb9e3e04d203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 100
-  height: 100
-  layers: 3
+  width: 70
+  height: 70
+  layers: 2
   useJobSystem: 1
   cubeMaterial: {fileID: 2100000, guid: a09d3224311bc1d46b5eaa2a52355ce8, type: 2}
 --- !u!4 &413694500
