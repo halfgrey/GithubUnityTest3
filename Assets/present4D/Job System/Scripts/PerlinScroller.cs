@@ -20,6 +20,7 @@ public class PerlinScroller : MonoBehaviour {
     JobHandle cubePositionJobHandle;
     public bool useJobSystem;
     public Material cubeMaterial;
+    public float speed = 0.1f;
 
     void Awake()
     {
@@ -83,7 +84,7 @@ public class PerlinScroller : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        xoffset = xoffset + 0.1f;
+        xoffset = xoffset + speed;
         if (useJobSystem)
         {
             //   int xoffset = (int)(this.transform.position.x - width / 2.0f);
@@ -104,6 +105,7 @@ public class PerlinScroller : MonoBehaviour {
             int zoffset = (int)(this.transform.position.z - height / 2.0f);
             for (int i = 0; i < cubeCount; i++)
             {
+                
                 int x = i / (width * layers);
                 int z = (i - x * height * layers) / layers;
                 int yoffset = i - x * width * layers - z * layers;
