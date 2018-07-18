@@ -10,6 +10,7 @@ public class Assets_present4D_UnitTests_Editor_Tests_NewTestScript {
         // Use the Assert class to test conditions.
         string test1 = "equal";
         string test2 = "equal";
+        Debug.Log("Build test: if equal");
         Assert.AreEqual(test1, test2);
     }
 
